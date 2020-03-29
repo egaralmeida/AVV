@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    // Objects
+    // References
     public GameObject planet;
+    public GameObject followPoint;
     public GameObject projectile;
     private GameObject myShot;
+    private Transform fPointTrans;
 
-    // Control Variables    
+    // Config Variables    
     public float movementSpeed = 1.5f;
     public float semiMajor = 7f;
     public float semiMinor = 4f;
     public float orbitPosition = -180f;
-
     private float movement = 0f;
     private short spriteAngleCorrection = 270; // TODO: Take this to zero when integrating final art.
+
+    // Follow Point
+    public float minOffsetY = 2f;
+    public float maxOffsetY = 4.75f;
 
     // Since these comments are auto added when creating the file, I'm gonna replace them for freedom.
     void Start()
     {
-        
+        fPointTrans = followPoint.transform;//this.GetComponentInChildren<Transform>();
+        if (fPointTrans == null)
+            Debug.Log("Can't get followPoint's Transform");
     }
 
     // Like here, for example: This method updates. You're welcome.
@@ -35,6 +42,9 @@ public class Player : MonoBehaviour
         {
             Fire();
         }
+
+        UpdateFollowPoint();
+
     }
 
     void FixedUpdate()
@@ -48,8 +58,15 @@ public class Player : MonoBehaviour
     void Fire()
     {
         myShot = Instantiate(projectile, this.transform.position, this.transform.rotation);
-        //myShot = myShot.GetComponent<GameObject>();
         Shot myShotScript = (Shot)myShot.GetComponent(typeof(Shot));
         myShotScript.parent = this.transform;
+    }
+
+    void UpdateFollowPoint()
+    {
+        Vector3 localPos = fPointTrans.localPosition;
+        float distPlayerPlanet = Vector2.Distance(this.transform.position, planet.transform.position);
+        localPos.y = Mathf.Clamp(distPlayerPlanet.map(semiMinor, semiMajor, minOffsetY, maxOffsetY), minOffsetY, maxOffsetY);
+        fPointTrans.localPosition = localPos;
     }
 }
