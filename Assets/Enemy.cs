@@ -4,27 +4,39 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public GameObject origin;
+    public Transform origin;
+    public float speed = 1.1f;
 
     private Vector3 destination;
-    private short spriteAngleCorrection = 270; // TODO: Take this to zero when integrating final art.
 
     // This is the startatory, the birthplace of rome
     void Start()
     {
-        // Place the enemy on the center of the planet, and below it.
-        Vector3 startPosition = new Vector3(origin.transform.position.x, origin.transform.position.y, 1);
-        this.transform.position = startPosition;
+        this.transform.position = origin.transform.position;
+        this.transform.rotation = origin.transform.rotation;
 
-        destination = Random.insideUnitCircle * 4;
-        this.transform.lookAt2D(destination, spriteAngleCorrection);
+        Vector3 currRotation = this.transform.rotation.eulerAngles;
+        currRotation.z += Mathf.Floor(Random.Range(-3f, 3f));
+        this.transform.rotation = Quaternion.Euler(currRotation);
     }
 
     // This is the updatatory, the microsoft of rome
     void Update()
     {
+        float angle = Mathf.Deg2Rad * this.transform.rotation.eulerAngles.z;
         Vector2 myPos = this.transform.position;
-        myPos = Vector2.MoveTowards(myPos, destination, 1f * Time.deltaTime);//Vector2.Distance(myPos, destination));
+        myPos.x -= Mathf.Sin(angle) * speed * Time.deltaTime;
+        myPos.y += Mathf.Cos(angle) * speed * Time.deltaTime;
         this.transform.position = myPos;
+    }
+
+    float constrainAngle(float angle)
+    {
+        angle = angle % 360;
+
+        if (angle < 0)
+            angle += 360;
+
+        return angle;
     }
 }

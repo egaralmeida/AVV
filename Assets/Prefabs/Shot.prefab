@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1373172156666920691}
   - component: {fileID: 7480187386602822400}
+  - component: {fileID: -3774706996781720408}
   - component: {fileID: 4600844986770537485}
   - component: {fileID: 1148692281929919214}
   - component: {fileID: -8697045890797124583}
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 46f755364c9e7da44874f5405859ce08, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b567d6b21a1abe44aaf7873966a29a60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,6 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &-3774706996781720408
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4551362870357816932}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: bbb16c51671ea754b8fc037ed0dee726, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!50 &4600844986770537485
 Rigidbody2D:
   serializedVersion: 4

@@ -17,7 +17,6 @@ public class Player : MonoBehaviour
     public float semiMinor = 4f;
     public float orbitPosition = -180f;
     private float movement = 0f;
-    private short spriteAngleCorrection = 270; // TODO: Take this to zero when integrating final art.
 
     // Follow Point
     public float minOffsetY = 2f;
@@ -36,7 +35,7 @@ public class Player : MonoBehaviour
     {
         movement = Input.GetAxisRaw("Horizontal");
 
-        this.transform.lookAt2D(planet.transform.position, spriteAngleCorrection);
+        this.transform.lookAt2D(planet.transform.position);
 
         if (Input.GetButtonDown("Fire1"))
         {
