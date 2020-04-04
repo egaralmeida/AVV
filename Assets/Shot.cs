@@ -37,11 +37,11 @@ public class Shot : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D hitInfo) {
-        
-            if(hitInfo.gameObject.name == "Enemy")
-                Destroy(hitInfo.gameObject);
-            
-            Destroy(gameObject);
+    void OnTriggerEnter2D(Collider2D hitInfo)
+    {
+        if (hitInfo.gameObject.name == "Enemy")
+            Destroy(hitInfo.gameObject);
+
+        Destroy(gameObject);
     }
 }

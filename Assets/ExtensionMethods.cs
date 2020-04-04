@@ -12,13 +12,13 @@ public static class ExtensionMethods
         myTransform.rotation = Quaternion.AngleAxis(spriteAngle, Vector3.forward);
     }
 
-    /* Arduino map function
-    public static float map(this float val, float from1, float to1, float from2, float to2)
+    public static void lookAt2DLocal(this Transform myTransform, Vector3 targetPos, short spriteAngleCorrection)
     {
-        return (val - from1) / (to1 - from1) * (to2 - from2) + from2;
+        Vector3 dir = targetPos - myTransform.position;
+        float spriteAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + spriteAngleCorrection;
+        myTransform.localRotation = Quaternion.AngleAxis(spriteAngle, Vector3.forward);
     }
-    */
-    
+
     // Arduino map function
     public static float map(this float x, float in_min, float in_max, float out_min, float out_max)
     {
