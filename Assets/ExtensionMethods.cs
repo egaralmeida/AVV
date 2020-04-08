@@ -4,6 +4,14 @@ using UnityEngine;
 
 public static class ExtensionMethods
 {
+    public static void lookAt(this Quaternion myRotation, Vector3 originPos, Vector3 targetPos)
+    {
+        short spriteAngleCorrection = 270;
+        Vector3 dir = targetPos - originPos;
+        float spriteAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + spriteAngleCorrection;
+        myRotation = Quaternion.AngleAxis(spriteAngle, Vector3.forward);
+    }
+
     // LookAt but for 2D | Thanks robertbu http://answers.unity.com/answers/641238/view.html
     public static void lookAt2D(this Transform myTransform, Vector3 targetPos)
     {

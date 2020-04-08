@@ -11,21 +11,21 @@ public class CameraController : MonoBehaviour
     public float minZoomOffset = 2.5f;
     public float maxZoomOffset = 4f;
 
-    private Vector3 velocity = Vector3.zero;
-    private Camera myCamera;
-    private float minDistance;
-    private float maxDistance;
+    private Vector3 _velocity = Vector3.zero;
+    private Camera _myCamera;
+    private float _minDistance;
+    private float _maxDistance;
 
     // It's like the big bang
     void Start()
     {
-        myCamera = this.GetComponent<Camera>();
+        _myCamera = this.GetComponent<Camera>();
 
         Player playerScript = player.GetComponent<Player>();
         if (playerScript != null)
         {
-            minDistance = playerScript.semiMinor;
-            maxDistance = playerScript.semiMajor;
+            _minDistance = playerScript.semiMinor;
+            _maxDistance = playerScript.semiMajor;
         }
     }
 
@@ -34,12 +34,12 @@ public class CameraController : MonoBehaviour
     {
         float distPlanet = Vector2.Distance(player.position, planet.position);
 
-        myCamera.orthographicSize = Mathf.Clamp(distPlanet.map(minDistance, maxDistance, minZoomOffset, maxZoomOffset), minZoomOffset, maxZoomOffset);
+        _myCamera.orthographicSize = Mathf.Clamp(distPlanet.map(_minDistance, _maxDistance, minZoomOffset, maxZoomOffset), minZoomOffset, maxZoomOffset);
 
-        Vector3 point = myCamera.WorldToViewportPoint(followPoint.position);
-        Vector3 delta = followPoint.position - myCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
+        Vector3 point = _myCamera.WorldToViewportPoint(followPoint.position);
+        Vector3 delta = followPoint.position - _myCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
         Vector3 destination = transform.position + delta;
 
-        transform.position = Vector3.SmoothDamp(transform.position, destination, ref velocity, dampTime);
+        transform.position = Vector3.SmoothDamp(transform.position, destination, ref _velocity, dampTime);
     }
 }

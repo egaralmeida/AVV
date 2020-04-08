@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
+    public SO_Enemy myData;
     public Transform origin;
     public float speed = 1.1f;
 
-    private Vector3 destination;
+    private Vector3 _destination;
 
     // This is the startatory, the birthplace of rome
     void Start()
     {
+        this._health = myData.health;
+        this._damage = myData.damage;
+
         this.transform.position = origin.transform.position;
         this.transform.rotation = origin.transform.rotation;
 
