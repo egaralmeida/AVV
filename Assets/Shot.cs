@@ -7,7 +7,7 @@ public class Shot : MonoBehaviour
     private Rigidbody2D rb;
     public Transform parent;
 
-    private float rocketForce = 32f;
+    public float bulletForce = 32f;
     private Vector2 forceVector;
 
     // Start is called Start.
@@ -29,7 +29,7 @@ public class Shot : MonoBehaviour
     {
         if (parent != null)
         {
-            rb.AddForce(forceVector * -rocketForce);
+            rb.AddForce(forceVector * -bulletForce);
         }
         else
         {
@@ -39,9 +39,24 @@ public class Shot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
-        if (hitInfo.gameObject.name == "Enemy")
-            Destroy(hitInfo.gameObject);
+        if (hitInfo.transform != null && hitInfo.transform != parent)
+        {
+            GameObject hitGameObject = hitInfo.gameObject;
+            Character hitScript = hitGameObject.GetComponent<Character>();
+            Character parentScript = parent.GetComponent<Character>();
 
-        Destroy(gameObject);
+            if (hitScript != null && parentScript != null)
+            {
+                hitScript.health -= parentScript.damage;
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Debug.Log("Missing info on either the shooter or the victim.");
+            }
+        }
+
+
+
     }
 }

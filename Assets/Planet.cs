@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Planet : MonoBehaviour
+public class Planet : Character
 {
     public Transform shieldTransform;
     public float shieldRotationTime = 3f;
@@ -40,9 +40,9 @@ public class Planet : MonoBehaviour
         {
             shieldTransform.rotation = Quaternion.Lerp(shieldTransform.rotation, Quaternion.Euler(_shieldNewRotation), Time.deltaTime * shieldSpeed);
 
-            float shieldCurrRot = Mathf.Abs(Mathf.Round(shieldTransform.rotation.z * 100) / 100);
-            float shieldNewRot = Mathf.Abs(Mathf.Round(Quaternion.Euler(_shieldNewRotation).z * 100) / 100);
-  
+            int shieldCurrRot = (int)shieldTransform.rotation.eulerAngles.z;
+            int shieldNewRot = (int)Quaternion.Euler(_shieldNewRotation).eulerAngles.z;
+            
             if (shieldCurrRot == shieldNewRot)
             {
                 _shieldRotating = false;

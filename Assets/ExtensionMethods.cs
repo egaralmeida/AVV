@@ -6,16 +6,16 @@ public static class ExtensionMethods
 {
     public static void lookAt(this Quaternion myRotation, Vector3 originPos, Vector3 targetPos)
     {
-        short spriteAngleCorrection = 270;
         Vector3 dir = targetPos - originPos;
-        float spriteAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + spriteAngleCorrection;
-        myRotation = Quaternion.AngleAxis(spriteAngle, Vector3.forward);
+        dir.Normalize();
+        float spriteAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        myRotation = Quaternion.Euler(0, 0, spriteAngle);
     }
 
     // LookAt but for 2D | Thanks robertbu http://answers.unity.com/answers/641238/view.html
     public static void lookAt2D(this Transform myTransform, Vector3 targetPos)
     {
-        short spriteAngleCorrection = 270;
+        short spriteAngleCorrection = 0;
         Vector3 dir = targetPos - myTransform.position;
         float spriteAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + spriteAngleCorrection;
         myTransform.rotation = Quaternion.AngleAxis(spriteAngle, Vector3.forward);
@@ -23,7 +23,7 @@ public static class ExtensionMethods
 
     public static void lookAt2DLocal(this Transform myTransform, Vector3 targetPos)
     {
-        short spriteAngleCorrection = 270;
+        short spriteAngleCorrection = 0;
         Vector3 dir = targetPos - myTransform.position;
         float spriteAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + spriteAngleCorrection;
         myTransform.localRotation = Quaternion.AngleAxis(spriteAngle, Vector3.forward);

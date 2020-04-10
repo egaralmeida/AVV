@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7403695622874438428}
   - component: {fileID: 9158508866098691503}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy_Missile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -136,5 +136,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.12, y: 0.22}
-  m_Direction: 0
+  m_Size: {x: 0.22, y: 0.12}
+  m_Direction: 1

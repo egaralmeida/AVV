@@ -18,7 +18,10 @@ abstract public class Character : MonoBehaviour
         get => _damage;
     }
 
-
+    protected virtual void kill()
+    {
+        Destroy(this.gameObject);
+    }
 }
 
 abstract public class NPC : Character

@@ -27,11 +27,8 @@ public class Enemy : Character
     // This is the updatatory, the microsoft of rome
     void Update()
     {
-        float angle = Mathf.Deg2Rad * this.transform.rotation.eulerAngles.z;
-        Vector2 myPos = this.transform.position;
-        myPos.x -= Mathf.Sin(angle) * speed * Time.deltaTime;
-        myPos.y += Mathf.Cos(angle) * speed * Time.deltaTime;
-        this.transform.position = myPos;
+        Vector3 velocity = new Vector3(speed * Time.deltaTime, 0, 0);
+        this.transform.position += this.transform.rotation * velocity;
     }
 
     float constrainAngle(float angle)
