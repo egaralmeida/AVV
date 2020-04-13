@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 1
-  _damage: 1
+  myData: {fileID: 0}
   planet: {fileID: 5850531684332626839, guid: 2ac2d71faa855464ab4dd7cbaced9cff, type: 3}
   followPoint: {fileID: 9031855162395951896}
   projectile: {fileID: 4551362870357816932, guid: 4084ff0b2945dfb4f8d2bcdf84d7d37e,
@@ -242,7 +242,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 87684ddffc49cbf498500a99ba745c7b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -263,12 +263,12 @@ SpriteRenderer:
   m_SortingLayerID: -322865339
   m_SortingLayer: 3
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: f750450a33551944ab9dbb270b70f4d9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00f8115db6c279c41a60bb69ea2c908f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.12, y: 0.75}
+  m_Size: {x: 0.96, y: 1.04}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -4,18 +4,13 @@ using UnityEngine;
 
 abstract public class Character : MonoBehaviour
 {
-    [SerializeField] protected float _health = 1;
-    [SerializeField] protected float _damage = 1;
+    [SerializeField] private float _health = 1;
+    public SO_Character myData;
 
     public float health
     {
         get => _health;
         set => _health = value;
-    }
-
-    public float damage
-    {
-        get => _damage;
     }
 
     protected virtual void kill()
@@ -24,7 +19,7 @@ abstract public class Character : MonoBehaviour
     }
 }
 
-abstract public class NPC : Character
+abstract public class Enemy : Character
 {
 
 }

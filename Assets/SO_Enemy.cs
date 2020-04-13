@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyData", menuName = "AVV/SO_Enemy", order = 1)]
+[CreateAssetMenu(fileName = "EnemyData", menuName = "AVV/Enemy Data", order = 2)]
 public class SO_Enemy : ScriptableObject
 {
     public int health;
-    public int damage;
 }

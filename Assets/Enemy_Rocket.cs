@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : Character
+public class Enemy_Rocket : Character
 {
-    public SO_Enemy myData;
     public Transform origin;
     public float speed = 1.1f;
 
@@ -13,8 +12,7 @@ public class Enemy : Character
     // This is the startatory, the birthplace of rome
     void Start()
     {
-        this._health = myData.health;
-        this._damage = myData.damage;
+        this.health = myData.health;
 
         this.transform.position = origin.transform.position;
         this.transform.rotation = origin.transform.rotation;

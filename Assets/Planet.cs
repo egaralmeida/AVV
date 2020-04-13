@@ -54,14 +54,12 @@ public class Planet : Character
         {
             if (_enemyDeploying)
             {
-                //Debug.Log("Waiting to deploy");
                 // Wait until new enemies can be deployed
                 _enemySpawnTimer += Time.deltaTime;
                 if (_enemySpawnTimer > enemySpawnTime)
                 {
-                    //Debug.Log("Spawning enemy");
                     GameObject myEnemy = Instantiate(currentEnemy, shieldTransform.position, shieldTransform.rotation);
-                    Enemy enemyScript = myEnemy.GetComponent<Enemy>();
+                    Enemy_Rocket enemyScript = myEnemy.GetComponent<Enemy_Rocket>();
                     enemyScript.origin = shieldTransform;
                     _enemiesDeployed++;
 

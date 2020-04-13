@@ -9,6 +9,7 @@ public class Player : Character
     public Transform followPoint;
     public GameObject projectile;
     public Transform shootingPoint;
+    private Renderer myRenderer;
 
     // Config Variables    
     public float semiMajor = 7f; //TODO: move these to the planet's ScriptableObject?
@@ -24,12 +25,15 @@ public class Player : Character
     // Since these comments are auto added when creating the file, I'm gonna replace them for freedom.
     void Start()
     {
-
+        myRenderer = this.GetComponent<Renderer>();
     }
 
     // Like here, for example: This method updates. You're welcome.
     void Update()
     {
+
+        myRenderer.material.SetFloat("_AlphaIntensity_Fade_2", Random.Range(2.5f, 3f));
+
         _movement = Input.GetAxisRaw("Horizontal");
 
         this.transform.lookAt2D(planet.transform.position);
@@ -54,7 +58,7 @@ public class Player : Character
     void Fire()
     {
         GameObject _myShot = Instantiate(projectile, shootingPoint.position, this.transform.rotation);
-        Shot myShotScript = (Shot)_myShot.GetComponent(typeof(Shot));
+        Projectile myShotScript = (Projectile)_myShot.GetComponent(typeof(Projectile));
         myShotScript.parent = this.transform;
     }
 

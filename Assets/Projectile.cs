@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shot : MonoBehaviour
+public class Projectile : MonoBehaviour
 {
     private Rigidbody2D rb;
     public Transform parent;
@@ -47,7 +47,7 @@ public class Shot : MonoBehaviour
 
             if (hitScript != null && parentScript != null)
             {
-                hitScript.health -= parentScript.damage;
+                hitScript.health -= 1;
                 Destroy(this.gameObject);
             }
             else

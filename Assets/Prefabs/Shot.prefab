@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -8697045890797124583}
   - component: {fileID: -3774706996781720408}
   - component: {fileID: 4600844986770537485}
-  - component: {fileID: 1148692281929919214}
+  - component: {fileID: 5106748848677842026}
   m_Layer: 0
   m_Name: Shot
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4551362870357816932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.0608258, y: -0.270389, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,15 +71,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1536220871
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b567d6b21a1abe44aaf7873966a29a60, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.09, y: 0.54}
+  m_Size: {x: 0.57, y: 0.09}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -94,10 +94,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4551362870357816932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7fd82de7bde1f142a4aa26422cff523, type: 3}
+  m_Script: {fileID: 11500000, guid: 6dc17554be2d38d43a6df689f1bd3d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parent: {fileID: 0}
+  bulletForce: 32
 --- !u!111 &-3774706996781720408
 Animation:
   m_ObjectHideFlags: 0
@@ -134,8 +135,8 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!70 &1148692281929919214
+  m_Constraints: 0
+--- !u!70 &5106748848677842026
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -149,5 +150,5 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.09, y: 0.37}
-  m_Direction: 0
+  m_Size: {x: 0.57, y: 0.07}
+  m_Direction: 1

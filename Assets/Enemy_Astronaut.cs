@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Enemy_Astronaut : Character
 {
-    [SerializeField] private Transform player;
     [SerializeField] private float rotationSpeed = 1f;
     [SerializeField] private float speed = 2f;
+    [SerializeField] private float fireDistance = 4f;
+    public Transform target;
 
     private Rigidbody2D myRigidBody;
+    private Quaternion newRotation;
 
     private bool moving = true;
-    private Quaternion targetRotation;
+    private bool firing = false;
 
     // This is !the_end, my only friend !the_end
     void Start()
@@ -28,18 +30,19 @@ public class Enemy_Astronaut : Character
     {
         if (moving)
         {
-            // Get rotation vector towards player
-            Vector3 dir = player.transform.position - this.transform.position;
+            // Get rotation vector towards target
+            Vector3 dir = target.transform.position - this.transform.position;
             dir.Normalize();
             float spriteAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            targetRotation = Quaternion.Euler(0, 0, spriteAngle);
+            newRotation = Quaternion.Euler(0, 0, spriteAngle);
 
             // Apply the rotation by steps
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
         }
-        else
-        {
 
+        if (health <= 0)
+        {
+            kill();
         }
     }
 
@@ -51,21 +54,34 @@ public class Enemy_Astronaut : Character
             myRigidBody.AddForce(this.transform.rotation * velocity);
         }
 
-        // Cast a ray looking for the player
-        Vector3 dir = player.transform.position - this.transform.position;
-        RaycastHit2D hitInfo = Physics2D.Raycast(this.transform.position,
-                                                    dir, Vector2.Distance(player.transform.position,
-                                                    this.transform.position),
-                                                    1 << 9);
+        // Get distance to target
+        float distanceToPlayer = Vector2.Distance(target.transform.position, this.transform.position);
+        
+        // Cast a ray looking for the target
+        Vector3 dir = target.transform.position - this.transform.position;
+        RaycastHit2D hitInfo = Physics2D.Raycast(this.transform.position, dir, distanceToPlayer, 1 << 9);
 
         Debug.DrawRay(this.transform.position, dir);
 
+        // If we don't see the target, 
         if (hitInfo.collider != null)
         {
             if (hitInfo.transform.tag == "Planet")
+            {
                 moving = false;
+            }
             else if (hitInfo.transform.tag == "Player")
-                moving = true;
+            {
+                if (distanceToPlayer > fireDistance)
+                {
+                    moving = true;
+                }
+                else
+                {
+                    moving = false;
+                    firing = true;
+                }
+            }
         }
     }
 }
