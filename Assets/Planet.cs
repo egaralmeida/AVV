@@ -24,6 +24,7 @@ public class Planet : Character
     private float _enemySpawnTimer = 0f;
     private bool _enemyDeploying = false;
     private short _enemiesDeployed = 0;
+    private WaveManager _waveManager;
 
     // Rabbit hole
     void Start()
@@ -31,6 +32,8 @@ public class Planet : Character
         drawOrbit();
 
         _enemySpawnTimer = enemySpawnTime; // So the first enemy comes out immediately.
+
+        _waveManager = GetComponent<WaveManager>(); // TODO: Redo this?
     }
 
     // Cultist persistency
@@ -69,6 +72,8 @@ public class Planet : Character
                         _enemiesDeployed = 0;
                         _enemySpawnTimer = enemySpawnTime; // So next time, first enemy deploys immediately.
                     }
+
+                    _waveManager.getNewWave();
 
                     _enemySpawnTimer -= enemySpawnTime;
                 }

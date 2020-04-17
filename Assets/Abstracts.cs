@@ -21,5 +21,5 @@ abstract public class Character : MonoBehaviour
 
 abstract public class Enemy : Character
 {
-
+    public Transform target;
 }

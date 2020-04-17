@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Astronaut : Character
+public class Enemy_Astronaut : Enemy
 {
     [SerializeField] private float rotationSpeed = 1f;
     [SerializeField] private float speed = 2f;
     [SerializeField] private float fireDistance = 4f;
-    public Transform target;
 
     private Rigidbody2D myRigidBody;
     private Quaternion newRotation;

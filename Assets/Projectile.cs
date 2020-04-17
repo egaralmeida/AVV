@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Rigidbody2D _rb;
     public Transform parent;
 
     public float bulletForce = 32f;
@@ -13,7 +13,7 @@ public class Projectile : MonoBehaviour
     // Start is called Start.
     void Start()
     {
-        rb = this.GetComponent<Rigidbody2D>();
+        _rb = this.GetComponent<Rigidbody2D>();
         if (parent != null)
         {
             forceVector = parent.position;
@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         if (parent != null)
         {
-            rb.AddForce(forceVector * -bulletForce);
+            _rb.AddForce(forceVector * -bulletForce);
         }
         else
         {

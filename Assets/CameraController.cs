@@ -16,9 +16,14 @@ public class CameraController : MonoBehaviour
     private float _minDistance;
     private float _maxDistance;
 
+    private int entero = 2;
+    private float flotante = 2f;
+    private string cadena = "pepe";
+
     // It's like the big bang
     void Start()
     {
+
         _myCamera = this.GetComponent<Camera>();
 
         Player playerScript = player.GetComponent<Player>();
