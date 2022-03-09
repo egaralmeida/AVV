@@ -2,16 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO: Remove?
 abstract public class Character : MonoBehaviour
 {
-    [SerializeField] private float _health = 1;
     public SO_Character myData;
 
-    public float health
-    {
-        get => _health;
-        set => _health = value;
-    }
+    [SerializeField] private float _health = 1;
+    public float health { get => _health; set => _health = value; }
 
     protected virtual void kill()
     {
@@ -21,5 +18,6 @@ abstract public class Character : MonoBehaviour
 
 abstract public class Enemy : Character
 {
-    public Transform target;
+    public Transform target { get => _target; set => _target = value; }
+    private Transform _target;
 }

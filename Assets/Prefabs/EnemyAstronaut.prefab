@@ -50,7 +50,7 @@ MonoBehaviour:
   myData: {fileID: 11400000, guid: 3082ec5d5a8748a42b3ad38b54c9f284, type: 2}
   rotationSpeed: 1
   speed: 0.5
-  player: {fileID: 9031855162828718086, guid: e54ed32ee8ed6c343bff35a479722419, type: 3}
+  fireDistance: 4
 --- !u!212 &8672596014120625461
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -111,7 +111,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.08, y: 0}

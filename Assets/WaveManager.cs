@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using UnityEngine;
+using System;
+//using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
@@ -13,29 +13,75 @@ public class WaveManager : MonoBehaviour
     }
 
     public List<Wave> wave;
-    private int waveNum = 0;
+    public GameObject player;
+    [SerializeField] private float _spawnRadius = 2f; // TODO: Calculate this instead.
+
+    private int _waveNum = 0;
+    private float _waveDelay = 3F;
+    private float _waveTimer = 0f;
+    private bool _newWaveAllowed = true;
+
+    void Start()
+    {
+
+    }
 
     void Update()
     {
-
+        if (!_newWaveAllowed)
+        {
+            _waveTimer += Time.deltaTime;
+            if (_waveTimer >= _waveDelay)
+            {
+                _newWaveAllowed = true;
+            }
+        }
     }
 
-    public void getNewWave()
+    public bool getNewWave()
     {
-        if(waveNum < wave.Count)
+        if (doNewWave())
         {
-            for(int i = 0; i < wave[waveNum].amount; i++)
-            {
-                GameObject go = Instantiate(wave[waveNum].enemy, this.transform.position, this.transform.rotation);
-                // TODO: Actual pooling
-            }
-
-            waveNum++;
+            return true;
         }
         else
         {
-            waveNum = 0; // TODO: maybe inform the lack of new waves by returning a boolean? 
+            return false;
         }
-            
     }
+
+    private bool doNewWave()
+    {
+
+        // Do we have waves left?
+        if (_waveNum < wave.Count && _newWaveAllowed)
+        {
+            // Give me an amount of enemies
+            for (int i = 0; i < wave[_waveNum].amount; i++)
+            {
+                // TODO: Actual pooling
+                Vector2 enemyPosition = this.transform.position;
+                enemyPosition += UnityEngine.Random.insideUnitCircle.normalized * _spawnRadius;
+                GameObject enemyGO = Instantiate(wave[_waveNum].enemy, enemyPosition, this.transform.rotation);
+                Enemy enemyGOScript = enemyGO.GetComponent<Enemy>();
+                enemyGOScript.target = player.transform;
+            }
+            
+            // Move to the next wave
+            _waveNum++;
+            // add UI manager call to temporary text
+            // Reset wave timer and disallow new waves
+            _waveTimer = 0;
+            _newWaveAllowed = false;
+        
+            return true;
+        }
+        else
+        {
+            _waveNum = 0; 
+            return false;
+        }
+
+    }
+
 }

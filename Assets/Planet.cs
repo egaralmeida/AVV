@@ -25,6 +25,7 @@ public class Planet : Character
     private bool _enemyDeploying = false;
     private short _enemiesDeployed = 0;
     private WaveManager _waveManager;
+    private GameObject _waveManagerGO;
 
     // Rabbit hole
     void Start()
@@ -33,7 +34,8 @@ public class Planet : Character
 
         _enemySpawnTimer = enemySpawnTime; // So the first enemy comes out immediately.
 
-        _waveManager = GetComponent<WaveManager>(); // TODO: Redo this?
+        _waveManagerGO = GameObject.FindWithTag("WaveManager");
+        _waveManager = _waveManagerGO.GetComponent<WaveManager>();
     }
 
     // Cultist persistency

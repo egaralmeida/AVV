@@ -12,15 +12,23 @@ public class Player : Character
     private Renderer myRenderer;
 
     // Config Variables    
-    public float semiMajor = 7f; //TODO: move these to the planet's ScriptableObject?
-    public float semiMinor = 4f; ///
+    public float semiMajor = 7f; // TODO: move these to the GameManager's Scriptable Object
+    public float semiMinor = 4f; //
     [SerializeField] private float _movementSpeed = 90;
     [SerializeField] private float _orbitPosition = -180f;
     [SerializeField] private float _movement = 0f;
+    [SerializeField] private float _fireRateDelay = 0.1f;
 
     // Follow Point
-    public float minOffsetY = 2f; // TODO: make private
-    public float maxOffsetY = 4.75f;
+    private float _minOffsetY = 2f; // TODO: make private
+    private float _maxOffsetY = 4.75f;
+
+    public float MinOffsetY { get => _minOffsetY; set => _minOffsetY = value; }
+    public float MaxOffsetY { get => _maxOffsetY; set => _maxOffsetY = value; }
+
+    // Work variables
+    private float _fireTimer = 0f;
+    private bool _firstClickShotDone = false;
 
     // Since these comments are auto added when creating the file, I'm gonna replace them for freedom.
     void Start()
@@ -38,9 +46,24 @@ public class Player : Character
 
         this.transform.lookAt2D(planet.transform.position);
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            Fire();
+            if (!_firstClickShotDone)
+            {
+                Fire();
+                _firstClickShotDone = true;
+            }
+
+            _fireTimer += Time.deltaTime;
+            if (_fireTimer >= _fireRateDelay)
+            {
+                Fire();
+                _fireTimer = 0;
+            }
+        }
+        else if (Input.GetButtonUp("Fire1"))
+        {
+            _firstClickShotDone = false;
         }
 
         UpdateFollowPoint();
@@ -66,7 +89,7 @@ public class Player : Character
     {
         Vector3 localPos = followPoint.localPosition;
         float distPlayerPlanet = Vector2.Distance(this.transform.position, planet.position);
-        localPos.x = Mathf.Clamp(distPlayerPlanet.map(semiMinor, semiMajor, minOffsetY, maxOffsetY), minOffsetY, maxOffsetY);
+        localPos.x = Mathf.Clamp(distPlayerPlanet.map(semiMinor, semiMajor, MinOffsetY, MaxOffsetY), MinOffsetY, MaxOffsetY);
         followPoint.localPosition = localPos;
     }
 }

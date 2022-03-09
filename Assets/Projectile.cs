@@ -31,10 +31,6 @@ public class Projectile : MonoBehaviour
         {
             _rb.AddForce(forceVector * -bulletForce);
         }
-        else
-        {
-            Debug.Log("No bullet yet [FixedUpdate]");
-        }
     }
 
     void OnTriggerEnter2D(Collider2D hitInfo)
